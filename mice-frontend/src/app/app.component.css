@@ -1,0 +1,11 @@
+/* Make space for the sidebar */
+.content {
+    margin-left: 260px; /* Sidebar width */
+    padding: 20px;
+  }
+  
+  /* To prevent the footer from overlapping content */
+  footer {
+    margin-top: 50px;
+  }
+  

@@ -1,0 +1,35 @@
+<div class="login-wrapper">
+  <!-- Partie logo -->
+  <div class="logo-container">
+    <img src="/logo-medione.png" alt="Medina" width="150" />
+
+  </div>
+
+  <!-- Formulaire de connexion -->
+  <div class="login-container">
+    <h2>Connexion</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-control">
+        <label for="username">Nom d'utilisateur</label>
+        <input id="username" formControlName="username" type="text" />
+        <div *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.invalid" class="error-message">
+          Le nom d'utilisateur est requis.
+        </div>
+      </div>
+
+      <div class="form-control">
+        <label for="password">Mot de passe</label>
+        <input id="password" formControlName="password" type="password" />
+        <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid" class="error-message">
+          Le mot de passe est requis.
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="loginForm.invalid">Se connecter</button>
+    </form>
+
+    <div class="register-link">
+      <p><a routerLink="">Contacter admin</a></p>
+    </div>
+  </div>
+</div>

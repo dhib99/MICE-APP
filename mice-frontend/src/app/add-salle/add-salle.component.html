@@ -1,0 +1,16 @@
+<form [formGroup]="salleForm" (ngSubmit)="onSubmit()">
+    <label for="nom">Nom de la salle</label>
+    <input id="nom" formControlName="nom" type="text" />
+    <div *ngIf="salleForm.get('nom')?.invalid && salleForm.get('nom')?.touched" class="error">
+      Nom requis
+    </div>
+  
+    <label for="capacite">Capacité</label>
+    <input id="capacite" formControlName="capacite" type="number" min="1" />
+    <div *ngIf="salleForm.get('capacite')?.invalid && salleForm.get('capacite')?.touched" class="error">
+      Capacité requise et doit être ≥ 1
+    </div>
+  
+    <button type="submit" [disabled]="salleForm.invalid">Ajouter la salle</button>
+  </form>
+  

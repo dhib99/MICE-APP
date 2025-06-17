@@ -1,0 +1,196 @@
+/* Conteneur principal pour le formulaire */
+.login-container {
+    width: 100%;
+    max-width: 420px;
+   
+    margin: 0 auto;
+    padding: 40px;
+    background-color:#e1e7ed;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeIn 0.5s ease-out;
+    box-sizing: border-box;
+    min-height: 550px;
+  }
+  
+  /* Animation d'apparition du formulaire */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Titre du formulaire */
+  h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 600;
+    text-align: center;
+  }
+  
+  /* Style des champs de saisie */
+  input {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 15px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /* Effet au survol des champs de saisie */
+  input:focus {
+    border-color: #4d90fe;
+    outline: none;
+    box-shadow: 0 0 6px rgba(77, 144, 254, 0.5);
+  }
+  
+  /* Étiquette des champs */
+  label {
+    font-size: 15px;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 6px;
+  }
+  
+  /* Bouton de soumission */
+  button {
+    padding: 12px;
+    background-color: #4d90fe;
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-weight: 600;
+    width: 100%;
+  }
+  
+  /* Effet de survol du bouton */
+  button:hover {
+    background-color: #357ae8;
+    transform: translateY(-3px);
+  }
+  
+  /* Désactivation du bouton */
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  /* Champ de formulaire avec une bordure en rouge si invalide */
+  input.ng-invalid.ng-touched {
+    border-color: #f44336;
+  }
+  
+  /* Message d'erreur sous le champ */
+  .error-message {
+    color: #f44336;
+    font-size: 12px;
+    margin-top: -1px;
+  }
+  
+  /* Lien vers la page d'inscription */
+
+  
+  .register-link a {
+    color: #4d90fe;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+  
+  .register-link a:hover {
+    color: #357ae8;
+  }
+  
+  /* RESPONSIVE STYLES */
+  
+  /* Si l'écran est plus petit que 768px (tablette et mobile) */
+  @media (max-width: 768px) {
+    .login-container {
+      width: 90%;
+      padding: 20px;
+    }
+  
+    h2 {
+      font-size: 24px;
+    }
+  
+    label {
+      font-size: 14px;
+    }
+  
+    input, button {
+      font-size: 14px;
+    }
+  
+    .register-link a {
+      font-size: 14px;
+    }
+  }
+  
+  /* Si l'écran est plus petit que 480px (pour les smartphones) */
+  @media (max-width: 480px) {
+    .login-container {
+      width: 90%;
+      padding: 15px;
+    }
+  
+    h2 {
+      font-size: 22px;
+    }
+  
+    label {
+      font-size: 13px;
+    }
+  
+    input, button {
+      font-size: 14px;
+      padding: 10px;
+    }
+  
+    .register-link a {
+      font-size: 12px;
+    }
+    .login-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #f8f9fa;
+    }
+    
+    .logo-container {
+      flex: 1;
+      text-align: center;
+      padding: 20px;
+    }
+    
+    .logo-container img {
+      max-width: 200px;
+      height: auto;
+    }
+    
+    .login-container {
+      flex: 1;
+      max-width: 400px;
+      background-color: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+  }
+  

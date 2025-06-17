@@ -1,0 +1,43 @@
+<div class="edit-user-container">
+    <h2>Modifier l'utilisateur</h2>
+    <form [formGroup]="editUserForm" (ngSubmit)="onSubmit()">
+      <label for="cin">CIN</label>
+      <input id="cin" type="number" formControlName="cin" />
+  
+      <label for="userName">Nom d'utilisateur</label>
+      <input id="userName" type="text" formControlName="userName" />
+  
+      <label for="firstName">Prénom</label>
+      <input id="firstName" type="text" formControlName="firstName" />
+  
+      <label for="lastName">Nom</label>
+      <input id="lastName" type="text" formControlName="lastName" />
+  
+      <label for="email">Email</label>
+      <input id="email" type="email" formControlName="email" />
+  
+      <label for="password">Mot de passe</label>
+      <input id="password" type="password" formControlName="password" />
+ 
+  
+     
+  
+      <label for="modificationDate">Date de modification</label>
+      <input id="modificationDate" type="date" formControlName="modificationDate" />
+  
+      <label for="status">Statut</label>
+      <select id="status" formControlName="status">
+        <option [value]="true">Actif</option>
+        <option [value]="false">Inactif</option>
+      </select>
+  
+      <label for="role">Rôle</label>
+      <select id="role" formControlName="role">
+        <option value="COMMERCIAL">COMMERCIAL</option>
+        <option value="ADMIN">ADMIN</option>
+      </select>
+  
+      <button type="submit">Enregistrer</button>
+    </form>
+  </div>
+  

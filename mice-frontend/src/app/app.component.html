@@ -1,0 +1,8 @@
+<app-navbar *ngIf="!isLoginRoute()"></app-navbar>
+<app-sidebar *ngIf="!isLoginRoute()"></app-sidebar>
+
+<div class="content">
+  <router-outlet></router-outlet>
+</div>
+
+<app-footer ></app-footer>

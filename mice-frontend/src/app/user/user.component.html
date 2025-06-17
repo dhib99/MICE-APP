@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div *ngFor="let userData of users" class="col-md-4 mb-4">
+      <div class="card h-100">
+      
+        <div class="card-body">
+          <h5 class="card-title">{{ userData.firstName }} {{ userData.lastName }}</h5>
+          <p class="card-text">
+            <strong>CIN:</strong> {{ userData.cin }} <br>
+            <strong>Email:</strong> {{ userData.email }} <br>
+      
+            <strong>userName:</strong> {{ userData.username }} <br>
+            
+
+            <strong>Status:</strong> {{ userData.status ? 'Active' : 'Inactive' }}
+          </p>
+          <button (click)="editUser(userData)">Modifier</button>
+          <button class="btn btn-danger" (click)="deleteUser(userData.id)">Supprimer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

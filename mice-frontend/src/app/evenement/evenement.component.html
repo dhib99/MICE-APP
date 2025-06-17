@@ -1,0 +1,134 @@
+<p-steps [model]="steps" [(activeIndex)]="activeIndex" [readonly]="true"></p-steps>
+
+<!-- Étape 1 : Choix général -->
+<div *ngIf="activeIndex === 0">
+  <form [formGroup]="reservationForm" (ngSubmit)="onNextClicked()">
+    <label>Type d'événement</label>
+    <select formControlName="eventType" required>
+      <option value="" disabled>Sélectionnez un type</option>
+      <option *ngFor="let type of eventTypes" [value]="type.value">{{ type.label }}</option>
+    </select>
+    <div *ngIf="reservationForm.get('eventType')?.invalid && reservationForm.get('eventType')?.touched" class="error">
+      Type requis
+    </div>
+
+    <label>Nom de l'événement</label>
+    <input formControlName="eventName" type="text" required />
+    <div *ngIf="reservationForm.get('eventName')?.invalid && reservationForm.get('eventName')?.touched" class="error">
+      Nom requis
+    </div>
+
+    <label>Date début</label>
+    <input formControlName="startDate" type="date" required />
+    <div *ngIf="reservationForm.get('startDate')?.invalid && reservationForm.get('startDate')?.touched" class="error">
+      Date début requise
+    </div>
+
+    <label>Date fin</label>
+    <input formControlName="endDate" type="date" required />
+    <div *ngIf="reservationForm.get('endDate')?.invalid && reservationForm.get('endDate')?.touched" class="error">
+      Date fin requise
+    </div>
+
+    <button type="submit">Suivant</button>
+  </form>
+</div>
+
+<!-- Étape 2 : Formulaire exposition ou salle -->
+<div *ngIf="activeIndex === 1">
+  <!-- Formulaire d’exposition -->
+  <!-- Formulaire d’exposition -->
+<div *ngIf="reservationForm.value.eventType === 'exposition'">
+  <form [formGroup]="expositionForm" (ngSubmit)="onNextClicked()">
+
+    <label>Choisir une exposition :</label>
+    <select formControlName="expositionId" required (change)="onExpositionSelected($event)">
+      <option value="" disabled>-- Sélectionnez une exposition --</option>
+      <option *ngFor="let expo of selectedExposition" [value]="expo.id">{{ expo.nom }}</option>
+    </select>
+    <div *ngIf="expositionForm.get('expositionId')?.invalid && expositionForm.get('expositionId')?.touched" class="error">
+      Exposition requise
+    </div>
+
+   
+
+    <h4>Plan interactif des stands</h4>
+    <svg width="1300" height="300" style="border:1px solid #ccc;">
+      <ng-container *ngFor="let stand of stands">
+        <rect
+          [attr.x]="stand.x"
+          [attr.y]="stand.y"
+          [attr.width]="stand.width"
+          [attr.height]="stand.height"
+          [attr.fill]="stand.reservedBy ? 'gray' : isStandSelected(stand) ? 'blue' : 'green'"
+          (click)="toggleStandSelection(stand)"
+          style="cursor: pointer; stroke: black; stroke-width: 1px;"
+        ></rect>
+        <text
+          [attr.x]="stand.x + 10"
+          [attr.y]="stand.y + 35"
+          fill="white"
+          font-size="12"
+          pointer-events="none"
+        >
+          {{ stand.reservedBy || stand.nom }}
+        </text>
+      </ng-container>
+    </svg>
+
+    <button type="button" (click)="prevStep()">Précédent</button>
+    <button type="submit">Suivant</button>
+  </form>
+</div>
+
+
+  <!-- Formulaire de salle -->
+  <div *ngIf="reservationForm.value.eventType === 'salle'">
+    <form [formGroup]="salleForm" (ngSubmit)="onNextClicked()">
+      <div *ngFor="let salle of salles" class="salle-card" (click)="selectRoom(salle)" [class.selected]="selectedSalle?.id === salle.id" style="cursor: pointer; border: 1px solid #ccc; padding: 15px; margin-bottom: 10px;">
+        <div class="room-info" style="margin-top: 10px;">
+          <h3>{{ salle.name }} ({{ salle.capacite }} places)</h3>
+        </div>
+        <button class="select-btn" type="button" (click)="selectRoom(salle)">SÉLECTIONNER <span *ngIf="selectedSalle?.id === salle.id">✔</span></button>
+      </div>
+
+      <div class="form-group mb-3" *ngIf="equipements && equipements.length > 0">
+        <label for="equipement">Équipement :</label>
+        <select id="equipement" class="form-control" formControlName="equipement" required>
+          <option value="" disabled>-- Choisir un équipement --</option>
+          <option *ngFor="let eq of equipements" [value]="eq.id">{{ eq.nom }} - {{ eq.description }}</option>
+        </select>
+      </div>
+
+      <button type="button" (click)="prevStep()">Précédent</button>
+      <button type="button" (click)="nextStepconfirm()">Suivant</button>
+
+    </form>
+  </div>
+</div>
+
+<!-- Étape 3 : Confirmation -->
+<!-- Étape 3 : Confirmation -->
+<div *ngIf="activeIndex === 2">
+  <h3>Confirmation de la réservation</h3>
+  <p><strong>Type d'événement :</strong> {{ confirmationData.eventType }}</p>
+  <p><strong>Nom :</strong> {{ confirmationData.eventName }}</p>
+  <p><strong>Date de début :</strong> {{ confirmationData.startDate }}</p>
+  <p><strong>Date de fin :</strong> {{ confirmationData.endDate }}</p>
+
+  <ng-container *ngIf="confirmationData.eventType === 'exposition'">
+    <p><strong>Exposant :</strong> {{ confirmationData.exposant }}</p>
+    <p><strong>Stands sélectionnés :</strong></p>
+    <ul>
+      <li *ngFor="let stand of confirmationData.stands">{{ stand.nom }}</li>
+    </ul>
+  </ng-container>
+
+  <ng-container *ngIf="confirmationData.eventType === 'salle'">
+    <p><strong>Salle :</strong> {{ confirmationData.salle?.name }} ({{ confirmationData.salle?.capacite }} places)</p>
+    <p><strong>Équipement :</strong> {{ confirmationData.equipement?.nom }}</p>
+  </ng-container>
+
+  <button type="button" (click)="prevStep()">Précédent</button>
+  <button type="button" (click)="submit()">Confirmer et envoyer</button>
+</div>

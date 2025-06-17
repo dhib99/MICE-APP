@@ -1,0 +1,29 @@
+<form [formGroup]="standForm" (ngSubmit)="onSubmit()">
+    <label>Nom du stand:</label>
+    <input type="text" formControlName="nom" />
+    <div *ngIf="standForm.get('nom')?.invalid && standForm.get('nom')?.touched">
+      Nom requis.
+    </div>
+  
+    <label>X:</label>
+    <input type="number" formControlName="x" />
+    <label>Y:</label>
+    <input type="number" formControlName="y" />
+  
+    <label>Largeur:</label>
+    <input type="number" formControlName="width" />
+    <label>Hauteur:</label>
+    <input type="number" formControlName="height" />
+  
+    <label>Disponibilité:</label>
+    <input type="checkbox" formControlName="disponibilite" />
+  
+    <label>ID Exposition:</label>
+    <input type="number" formControlName="expositionId" />
+  
+    <button type="submit">Créer Stand</button>
+  </form>
+  
+  <div *ngIf="successMessage" style="color:green;">{{ successMessage }}</div>
+  <div *ngIf="errorMessage" style="color:red;">{{ errorMessage }}</div>
+  

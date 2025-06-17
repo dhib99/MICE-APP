@@ -1,0 +1,23 @@
+
+
+<form [formGroup]="expositionForm" (ngSubmit)="submit()">
+  <label>
+    Nom:
+    <input formControlName="nom" type="text" />
+  </label>
+
+  <label>
+    Type:
+    <select formControlName="type">
+      <option value="" disabled selected>Choisir un type</option>
+      <option *ngFor="let t of expositionTypes" [value]="t">{{ t }}</option>
+    </select>
+  </label>
+
+  <label>
+    Max Stands:
+    <input formControlName="maxStands" type="number" />
+  </label>
+
+  <button type="submit" [disabled]="!expositionForm.valid">Créer Exposition</button>
+</form>

@@ -1,0 +1,55 @@
+<div class="container">
+    <h2>Gestion des équipements</h2>
+  
+    <form #equipementForm="ngForm" (ngSubmit)="onSubmit(equipementForm)">
+      <div class="form-group mb-3">
+        <input
+          name="nom"
+          type="text"
+          [(ngModel)]="nouvelEquipement.nom"
+          placeholder="Nom de l’équipement"
+          class="form-control"
+          required
+          #nom="ngModel"
+        />
+        <div *ngIf="nom.invalid && nom.touched" class="text-danger">
+          Le nom est obligatoire.
+        </div>
+      </div>
+  
+      <div class="form-group mb-3">
+        <textarea
+          name="desccription"
+          [(ngModel)]="nouvelEquipement.description"
+          placeholder="Description"
+          class="form-control"
+          rows="3"
+          required
+          #desccription="ngModel"
+        ></textarea>
+        <div *ngIf="desccription.invalid && desccription.touched" class="text-danger">
+          La description est obligatoire.
+        </div>
+      </div>
+  
+      <button type="submit" class="btn btn-primary">Ajouter</button>
+    </form>
+  
+    <hr />
+  
+    <ul class="list-group mt-4">
+      <li
+        *ngFor="let equipement of equipements; let i = index"
+        class="list-group-item d-flex justify-content-between align-items-center"
+      >
+        <div>
+          <strong>{{ equipement.nom }}</strong><br />
+          <small>{{ equipement.description }}</small>
+        </div>
+        <button (click)="supprimerEquipement(equipement.id!, i)" class="btn btn-danger btn-sm">
+          Supprimer
+        </button>
+      </li>
+    </ul>
+  </div>
+  
